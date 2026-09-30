@@ -2,7 +2,7 @@
 
 [English](./README.md) | **简体中文**
 
-一个把 **Qoder** 注册为模型 provider 的 omp(oh-my-pi)扩展,由 `pi-provider-qoder` 移植到 omp 扩展 API。
+一个把 **Qoder** 注册为模型 provider 的 omp(oh-my-pi)扩展,由 [`pi-provider-qoder`](https://github.com/simonsmh/pi-provider-qoder)（@simonsmh）移植到 omp 扩展 API。感谢 @simonsmh 创建的原版仓库,本 work 在其基础上构建。
 
 同时支持**中国区**(`qoder-cn`,默认启用)和**全球区**(`qoder`)网关。两者均完整实现;将 [`index.ts`](./index.ts) 中的 `QODER_PROVIDER_MODES` 改为 `["cn", "global"]` 可同时暴露两个 provider。
 

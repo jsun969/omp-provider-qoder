@@ -2,7 +2,7 @@
 
 **English** | [简体中文](./README.zh-CN.md)
 
-An omp (oh-my-pi) extension that registers **Qoder** as a model provider. Port of `pi-provider-qoder` to omp's extension API.
+An omp (oh-my-pi) extension that registers **Qoder** as a model provider. Forked from [pi-provider-qoder](https://github.com/simonsmh/pi-provider-qoder) by @simonsmh and ported to omp's extension API. Huge thanks to @simonsmh for building the original, which this work is built on top of.
 
 Both the China (`qoder-cn`, enabled by default) and global (`qoder`) gateways are fully implemented; register both by setting `QODER_PROVIDER_MODES` to `["cn", "global"]` in [`index.ts`](./index.ts).
 
