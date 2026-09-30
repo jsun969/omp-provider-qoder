@@ -4,7 +4,7 @@
 
 An omp (oh-my-pi) extension that registers **Qoder** as a model provider. Port of `pi-provider-qoder` to omp's extension API.
 
-Only the **China** gateway (`qoder-cn`) is registered by default. The global gateway (`qoder`) is fully implemented but not exposed; add `"global"` to `QODER_PROVIDER_MODES` in [`index.ts`](./index.ts) to register it.
+Both the China (`qoder-cn`, enabled by default) and global (`qoder`) gateways are fully implemented; register both by setting `QODER_PROVIDER_MODES` to `["cn", "global"]` in [`index.ts`](./index.ts).
 
 ## Install
 
@@ -16,17 +16,29 @@ omp auto-discovers extensions under `~/.omp/agent/extensions/`, and a directory 
 
 ## Login
 
+### China Gateway (`qoder-cn`)
+
 ```text
-/login qoder-cn        # China gateway (PAT only)
-/login qoder           # global gateway, if registered (browser device flow or PAT)
+/login qoder-cn        # PAT input prompt
 ```
+
+PAT page: https://qoder.com.cn/account/integrations
+
+### Global Gateway (`qoder`)
+
+```text
+/login qoder           # Browser device flow (PKCE + OAuth) or PAT
+```
+
+PAT page: https://qoder.com/account/integrations
 
 A PAT (`pt-...`) is exchanged for a short-lived job token; the PAT is kept in the credential's refresh field and re-exchanged on expiry. A PAT set in the environment logs the provider in at startup (first non-empty variable wins):
 
-| Region | Provider | Env vars | PAT page |
-| --- | --- | --- | --- |
-| China | `qoder-cn` | `QODERCN_API_KEY`, `QODERCN_PERSONAL_ACCESS_TOKEN`, `QODERCN_PAT` | https://qoder.com.cn/account/integrations |
-| Global | `qoder` | `QODER_API_KEY`, `QODER_PERSONAL_ACCESS_TOKEN`, `QODER_PAT` | https://qoder.com/account/integrations |
+| Provider | Env vars |
+| --- | --- |
+| `qoder-cn` | `QODERCN_API_KEY`, `QODERCN_PERSONAL_ACCESS_TOKEN`, `QODERCN_PAT` |
+| `qoder` | `QODER_API_KEY`, `QODER_PERSONAL_ACCESS_TOKEN`, `QODER_PAT` |
+To enable the global provider, set `QODER_PROVIDER_MODES` to `["cn", "global"]` in [`index.ts`](./index.ts) and restart omp.
 
 ## Usage
 

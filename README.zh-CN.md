@@ -4,7 +4,8 @@
 
 一个把 **Qoder** 注册为模型 provider 的 omp(oh-my-pi)扩展,由 `pi-provider-qoder` 移植到 omp 扩展 API。
 
-默认只注册**中国区**网关(`qoder-cn`)。全球区(`qoder`)已完整实现但未暴露;在 [`index.ts`](./index.ts) 的 `QODER_PROVIDER_MODES` 中加入 `"global"` 即可注册。
+同时支持**中国区**(`qoder-cn`,默认启用)和**全球区**(`qoder`)网关。两者均完整实现;将 [`index.ts`](./index.ts) 中的 `QODER_PROVIDER_MODES` 改为 `["cn", "global"]` 可同时暴露两个 provider。
+
 
 ## 安装
 
@@ -16,17 +17,29 @@ omp 会自动发现 `~/.omp/agent/extensions/` 下的扩展,含 `index.ts` 的�
 
 ## 登录
 
+### 中国区
+
 ```text
-/login qoder-cn        # 中国区网关(仅 PAT)
-/login qoder           # 全球区网关(如已注册;浏览器设备码流程或 PAT)
+/login qoder-cn        # PAT 输入框
 ```
 
-PAT(`pt-...`)会被换取为短期 job token;PAT 保存在凭据的 refresh 字段中,过期时自动重新换取。环境变量里设置了 PAT 时,provider 在启动时即完成登录(按顺序取第一个非空变量):
+PAT 页面: https://qoder.com.cn/account/integrations
 
-| 区域 | Provider | 环境变量 | PAT 页面 |
-| --- | --- | --- | --- |
-| 中国区 | `qoder-cn` | `QODERCN_API_KEY`、`QODERCN_PERSONAL_ACCESS_TOKEN`、`QODERCN_PAT` | https://qoder.com.cn/account/integrations |
-| 全球区 | `qoder` | `QODER_API_KEY`、`QODER_PERSONAL_ACCESS_TOKEN`、`QODER_PAT` | https://qoder.com/account/integrations |
+### 全球区
+
+```text
+/login qoder           # 浏览器设备码流程 (PKCE + OAuth) 或 PAT
+```
+
+PAT 页面: https://qoder.com/account/integrations
+
+如需启用全球区 provider,请将 [`index.ts`](./index.ts) 中的 `QODER_PROVIDER_MODES` 改为 `["cn", "global"]` 后重启 omp。
+环境变量里设置了 PAT 时,provider 在启动时即完成登录(按顺序取第一个非空变量):
+
+| Provider | 环境变量 |
+| --- | --- |
+| `qoder-cn` | `QODERCN_API_KEY`, `QODERCN_PERSONAL_ACCESS_TOKEN`, `QODERCN_PAT` |
+| `qoder` | `QODER_API_KEY`, `QODER_PERSONAL_ACCESS_TOKEN`, `QODER_PAT` |
 
 ## 使用
 
