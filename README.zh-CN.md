@@ -8,23 +8,11 @@
 
 ## 安装
 
-无需构建步骤 —— omp 用 Bun 直接加载这些 TypeScript 源码。含 `index.ts` 的目录本身就是合法的扩展入口,以下任选其一:
-
 ```bash
-# 1. 软链到用户扩展目录(自动发现)
-ln -s "$(pwd)" ~/.omp/agent/extensions/omp-provider-qoder
+git clone https://github.com/jsun969/omp-provider-qoder ~/.omp/agent/extensions/omp-provider-qoder
 ```
 
-```yaml
-# 2. ~/.omp/agent/config.yml
-extensions:
-  - ~/dev/omp-provider-qoder
-```
-
-```bash
-# 3. 单次会话 CLI 参数
-omp -e ~/dev/omp-provider-qoder
-```
+omp 会自动发现 `~/.omp/agent/extensions/` 下的扩展,含 `index.ts` 的目录即为合法入口。无需构建 —— 直接用 Bun 加载 TypeScript 源码。之后新开一个 omp 会话即可生效。
 
 ## 登录
 

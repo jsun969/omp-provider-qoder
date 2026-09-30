@@ -8,23 +8,11 @@ Only the **China** gateway (`qoder-cn`) is registered by default. The global gat
 
 ## Install
 
-No build step — omp loads these TypeScript sources directly with Bun. A directory containing `index.ts` is a valid extension entry, so point omp at this checkout by any of:
-
 ```bash
-# 1. Symlink into the user extension directory (auto-discovered)
-ln -s "$(pwd)" ~/.omp/agent/extensions/omp-provider-qoder
+git clone https://github.com/jsun969/omp-provider-qoder ~/.omp/agent/extensions/omp-provider-qoder
 ```
 
-```yaml
-# 2. ~/.omp/agent/config.yml
-extensions:
-  - ~/dev/omp-provider-qoder
-```
-
-```bash
-# 3. Per-session CLI flag
-omp -e ~/dev/omp-provider-qoder
-```
+omp auto-discovers extensions under `~/.omp/agent/extensions/`, and a directory containing `index.ts` is a valid entry. No build step — the TypeScript sources are loaded directly with Bun. Start a new session to pick it up.
 
 ## Login
 
